@@ -1,6 +1,5 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import db from './config/db';
 import userRoutes from './routes/userRoutes';
 import postRoutes from './routes/postRoutes';
 import commentRoutes from './routes/commentRoutes';
