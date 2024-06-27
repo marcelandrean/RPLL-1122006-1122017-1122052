@@ -1,70 +1,114 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { FontAwesome, AntDesign } from "@expo/vector-icons";
+import { useNavigation, NavigationProp } from "@react-navigation/native";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export type RootStackParamList = {
+  IndexScreen: undefined;
+  filter: undefined;
+  message: undefined;
+};
 
-export default function HomeScreen() {
+export default function IndexScreen() {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.navigate("filter")}>
+          <FontAwesome name="sliders" size={24} color="white" />
+        </TouchableOpacity>
+        <Text style={styles.title}>CONNECTOPIA</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("message")}>
+          <AntDesign name="message1" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.card}>
         <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
+          source={{
+            uri: "https://media.hitekno.com/thumbs/2022/02/20/13001-vonny-felicia-alias-onic-vonzy-brand-ambassador-onic-esports/730x480-img-13001-vonny-felicia-alias-onic-vonzy-brand-ambassador-onic-esports.jpg",
+          }}
+          style={styles.image}
         />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({ ios: 'cmd + d', android: 'cmd + m' })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+        <View style={styles.infoContainer}>
+          <Text style={styles.name}>
+            Vonzy, 23 <FontAwesome name="female" size={16} color="pink" />
+          </Text>
+          <Text style={styles.profession}>Brand Ambassador</Text>
+          <Text style={styles.bio}>BA @onic.esports{"\n"}John 13:7</Text>
+        </View>
+      </View>
+      <View style={styles.actions}>
+        <TouchableOpacity style={styles.actionButton}>
+          <FontAwesome name="times" size={24} color="black" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.actionButton}>
+          <FontAwesome name="heart" size={24} color="red" />
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#121212",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 10,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    padding: 10,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  title: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  card: {
+    width: "90%",
+    backgroundColor: "#1E1E1E",
+    borderRadius: 10,
+    overflow: "hidden",
+    alignItems: "center",
+  },
+  image: {
+    width: "100%",
+    height: 300,
+  },
+  infoContainer: {
+    padding: 10,
+    alignItems: "center",
+  },
+  name: {
+    fontSize: 22,
+    color: "white",
+  },
+  profession: {
+    fontSize: 16,
+    color: "gray",
+  },
+  bio: {
+    fontSize: 14,
+    color: "white",
+    textAlign: "center",
+  },
+  actions: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: "100%",
+    paddingBottom: 20,
+  },
+  actionButton: {
+    backgroundColor: "white",
+    padding: 15,
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
