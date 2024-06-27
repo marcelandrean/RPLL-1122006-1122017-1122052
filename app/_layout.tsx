@@ -30,6 +30,11 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="filter" options={{ headerShown: false }} />
+        <Stack.Screen name="message" options={{ headerShown: false }} />
+        <Stack.Screen name="ChatScreen" options={{ headerShown: false }} />
+        <Stack.Screen name="PostDetailScreen" options={{ headerShown: false }} />
+        <Stack.Screen name="CommentsScreen" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>
